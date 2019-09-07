@@ -2,7 +2,7 @@
 set -e
 
 # Add Remote Host SSH Key to SSH Agent
-(umask  077 ; mkdir -p ~/.ssh ; echo "$SSH_PRIVATE_KEY" | base64 --decode > ~/.ssh/id_rsa)
+(umask  077 ; mkdir -p ~/.ssh ; echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa)
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 
@@ -22,7 +22,7 @@ rsync -avh --no-compress --delete --ignore-errors --exclude-from '.rsync-ignore'
 # Copy the .env file to the Remote Host
 ssh -o StrictHostKeyChecking=no "$SSH_USER@$SSH_HOST" bash -s << BASH
 set -e
-echo "$ENV_FILE" | base64 --decode > "$SSH_PUBLIC_DIR/.env"
+echo "$ENV_FILE" | base64 -d > "$SSH_PUBLIC_DIR/.env"
 BASH
 
 # Run Outstanding Migrations & Clear Caches
