@@ -30,7 +30,7 @@ ssh -p $SSH_PORT -o StrictHostKeyChecking=no "$SSH_USER@$SSH_HOST" bash -s << BA
 set -e
 cd "$SSH_PUBLIC_DIR"
 php artisan migrate
-php artisan clear:cache
+php artisan cache:clear
 BASH
 
 # Disable Maintainence Mode on Remote Host
