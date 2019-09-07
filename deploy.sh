@@ -7,7 +7,7 @@ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 
 # Enable Maintainence Mode on Remote Host (Checks Artisan Exists first!)
-ssh -o StrictHostKeyChecking=no "$SSH_USER@$SSH_HOST" bash -s << BASH
+ssh -o -p $SSH_PORT StrictHostKeyChecking=no "$SSH_USER@$SSH_HOST" bash -s << BASH
 set -e
 cd "$SSH_PUBLIC_DIR"
 if [ -f "$SSH_PUBLIC_DIR/artisan" ]; then
@@ -17,16 +17,16 @@ BASH
 
 # Rsync the latest version to the Remote Host
 rsync -avh --no-compress --delete --ignore-errors --exclude-from '.rsync-ignore' \
-  -e "ssh -o StrictHostKeyChecking=no" ./ "$SSH_USER@$SSH_HOST:$SSH_PUBLIC_DIR"
+  -e "ssh -o -p $SSH_PORT StrictHostKeyChecking=no" ./ "$SSH_USER@$SSH_HOST:$SSH_PUBLIC_DIR"
 
 # Copy the .env file to the Remote Host
-ssh -o StrictHostKeyChecking=no "$SSH_USER@$SSH_HOST" bash -s << BASH
+ssh -o -p $SSH_PORT StrictHostKeyChecking=no "$SSH_USER@$SSH_HOST" bash -s << BASH
 set -e
 echo "$ENV_FILE" | base64 -d > "$SSH_PUBLIC_DIR/.env"
 BASH
 
 # Run Outstanding Migrations & Clear Caches
-ssh -o StrictHostKeyChecking=no "$SSH_USER@$SSH_HOST" bash -s << BASH
+ssh -o -p $SSH_PORT StrictHostKeyChecking=no "$SSH_USER@$SSH_HOST" bash -s << BASH
 set -e
 cd "$SSH_PUBLIC_DIR"
 php artisan migrate
@@ -34,7 +34,7 @@ php artisan clear:cache
 BASH
 
 # Disable Maintainence Mode on Remote Host
-ssh -o StrictHostKeyChecking=no "$SSH_USER@$SSH_HOST" bash -s << BASH
+ssh -o -p $SSH_PORT StrictHostKeyChecking=no "$SSH_USER@$SSH_HOST" bash -s << BASH
 set -e
 cd "$SSH_PUBLIC_DIR"
 php "$SSH_PUBLIC_DIR/artisan" up
