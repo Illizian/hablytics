@@ -1,0 +1,15 @@
+.alert {
+    @apply flex border-l-4 border-red-600 mb-4 py-4 pl-4 pr-2 bg-red-200 text-red-800;
+}
+
+.alert-sm {
+    @apply p-2;
+}
+
+.alert-info {
+    @apply border-blue-600 bg-blue-200 text-blue-800;
+}
+
+.alert-success {
+    @apply border-green-600 bg-green-200 text-green-800;
+}

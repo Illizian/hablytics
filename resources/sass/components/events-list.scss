@@ -1,0 +1,39 @@
+// TODO: Remove transitions for IE? (when we support desktop fully);
+
+:root {
+    // Set some sensible defaults, but this should
+    // be overridden in the HTML
+    --list-transition-delay: 1s;
+    --event-transition-delay: 0.1s;
+}
+
+.events-list {
+    @apply relative;
+
+    &:before {
+        @apply absolute border-l-2 border-gray-500;
+        content: "";
+        top: 1rem;
+        bottom: calc(100% - 1rem);
+        left: calc(0.25rem - 1px);
+        right: 0;
+        transition: bottom var(--list-transition-delay) linear;
+    }
+
+    .js-loaded &:before {
+        bottom: 1rem;
+    }
+}
+
+.events-list .event {
+    &:before {
+        @apply block bg-transparent rounded-full h-2 w-2;
+        content: "";
+        transition: background-color 0.1s linear;
+        transition-delay: var(--event-transition-delay);
+    }
+
+    .js-loaded &:before {
+        @apply bg-gray-500;
+    }
+}

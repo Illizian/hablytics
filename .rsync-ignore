@@ -1,0 +1,17 @@
+.editorconfig
+.env.example
+.git
+.gitattributes
+.gitignore
+.rsync-ignore
+.styleci.yml
+bitbucket-pipelines.yml
+cypress.json
+deploy.sh
+docker-compose.json
+node_modules/
+phpunit.xml
+readme.md
+tailwind.config.js
+webpack.mix.js
+well_known/

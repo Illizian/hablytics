@@ -1,0 +1,7 @@
+.pill {
+    @apply px-2 font-bold text-green-600 bg-green-300 rounded-full
+}
+
+.pill-secondary {
+    @apply text-purple-600 bg-purple-300;
+}

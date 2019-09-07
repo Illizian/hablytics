@@ -1,0 +1,26 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+@tailwind base;
+@tailwind components;
+
+@import 'components/buttons';
+@import 'components/pills';
+@import 'components/alerts';
+@import 'components/events-list';
+
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+#menu-toggle:checked + #menu {
+    @apply flex;
+}
+
+@tailwind utilities;
+

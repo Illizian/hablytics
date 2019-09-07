@@ -1,0 +1,46 @@
+image: lorisleiva/laravel-docker:7.3
+
+definitions:
+  step: &Install
+    name: Install
+    script:
+      - npm install
+      - composer install
+  step: &Build
+    name: Build
+    script:
+      - npm run prod
+  step: &Test
+    name: Test
+    script:
+      - phpunit --coverage-text --colors=never
+  step: &Deploy
+    name: Deploy [Unnamed]
+    script:
+      - ./deploy.sh
+  caches:
+    node_modules: node_modules
+    composer: vendor
+    public: public
+
+pipelines:
+  default:
+    - step: *Install-step
+    - step: *Build-step
+    - step: *Test-step
+  branches:
+    release/staging:
+      - step: *Install-step
+      - step: *Build-step
+      - step:
+        <<: *Deploy
+          name: Deploy to Staging
+          deployment: staging
+    release/production:
+      - step: *Install-step
+      - step: *Build-step
+      - step:
+        <<: *Deploy
+          name: Deploy to Production
+          deployment: production
+
