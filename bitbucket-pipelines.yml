@@ -8,15 +8,15 @@ definitions:
           - npm install
           - composer install
         artifacts:
-          - node_modules
-          - vendor
+          - node_modules/**
+          - vendor/**
     - step: &Build
         name: Build
         script:
           - npm run prod
         artifacts:
-          - public
-          - vendor
+          - public/**
+          - vendor/**
     - step: &Test
         name: Test
         script:
