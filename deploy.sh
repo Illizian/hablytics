@@ -2,7 +2,7 @@
 set -e
 
 # Add Remote Host SSH Key to SSH Agent
-(umask  077 ; mkdir -p ~/.ssh ; echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa)
+(umask  077 ; mkdir ~/.ssh ; echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa)
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 
