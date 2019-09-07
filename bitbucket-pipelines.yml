@@ -20,7 +20,7 @@ definitions:
         script:
           - ./deploy.sh
   caches:
-    node_modules: node_modules
+    node: node_modules
     composer: vendor
     public: public
 
