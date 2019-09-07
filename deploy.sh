@@ -6,6 +6,10 @@ set -e
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 
+# Bitbucket have set umask 0000 and chmod 777, fix this.
+find ./ -type f -exec chmod 664 {} \;
+find ./ -type d -exec chmod 775 {} \;
+
 # Enable Maintainence Mode on Remote Host (Checks Artisan Exists first!)
 ssh -p $SSH_PORT -o StrictHostKeyChecking=no "$SSH_USER@$SSH_HOST" bash -s << BASH
 set -e
