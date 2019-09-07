@@ -14,4 +14,4 @@ phpunit.xml
 readme.md
 tailwind.config.js
 webpack.mix.js
-well_known/
+.well-known/
