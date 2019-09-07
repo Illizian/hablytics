@@ -40,13 +40,13 @@ pipelines:
       - step: *Install
       - step: *Build
       - step:
-        <<: *Deploy
-        name: Deploy to Staging
-        deployment: staging
+          <<: *Deploy
+          name: Deploy to Staging
+          deployment: staging
     release/production:
       - step: *Install
       - step: *Build
       - step:
-        <<: *Deploy
-        name: Deploy to Production
-        deployment: production
+          <<: *Deploy
+          name: Deploy to Production
+          deployment: production
