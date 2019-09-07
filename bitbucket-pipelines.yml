@@ -3,22 +3,22 @@ image: lorisleiva/laravel-docker:7.3
 definitions:
   steps:
     - step: &Install
-      name: Install
-      script:
-        - npm install
-        - composer install
+        name: Install
+        script:
+          - npm install
+          - composer install
     - step: &Build
-      name: Build
-      script:
-        - npm run prod
+        name: Build
+        script:
+          - npm run prod
     - step: &Test
-      name: Test
-      script:
-        - phpunit --coverage-text --colors=never
+        name: Test
+        script:
+          - phpunit --coverage-text --colors=never
     - step: &Deploy
-      name: Deploy [Unnamed]
-      script:
-        - ./deploy.sh
+        name: Deploy [Unnamed]
+        script:
+          - ./deploy.sh
   caches:
     node_modules: node_modules
     composer: vendor
