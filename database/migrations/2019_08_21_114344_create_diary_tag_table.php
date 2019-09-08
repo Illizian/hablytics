@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Schema;
 
 class CreateDiaryTagTable extends Migration
 {
@@ -15,7 +16,7 @@ class CreateDiaryTagTable extends Migration
     {
         Schema::create('diary_tag', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamp('at');
+            $table->timestamp('at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->bigInteger('value')->nullable();
 
             $table->string('diary_id');
