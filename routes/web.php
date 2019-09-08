@@ -24,5 +24,8 @@ Route::get('/diary/{id}/create', 'DiaryController@createEvent')->name('diary.cre
 Route::post('/diary/{id}/create', 'DiaryController@postCreateEvent');
 Route::get('/diary/{id}/create/{tag_id}', 'DiaryController@quickEvent');
 
+Route::get('/diary-tag/{id}', 'DiaryTagController@view');
+Route::delete('/diary-tag/{id}', 'DiaryTagController@delete');
+
 Route::get('/tags', 'TagController@index')->name('tag.index');
 Route::get('/tags/{id}', 'TagController@view')->name('tag.view');

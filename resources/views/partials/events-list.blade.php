@@ -9,9 +9,9 @@
 <ul class="events-list" style="--list-transition-delay: {{ count($events) * 0.1 }}s;">
     @foreach($events as $event)
         <li class="my-1 event flex items-center" style="--event-transition-delay: {{ $loop->index * 0.1 }}s;">
-            <span class="ml-2">
+            <a class="ml-2" href="/diary-tag/{{ $event->id }}">
                 {{ $event->tag->name }}
-            </span>
+            </a>
 
             @if($event->value && $event->value > 1)
                 <span class="ml-2 pill">

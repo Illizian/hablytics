@@ -25,3 +25,13 @@
 .btn-green:focus {
     @apply bg-green-400;
 }
+
+.btn-red {
+    @apply bg-red-500;
+}
+.btn-red:hover {
+    @apply bg-red-400;
+}
+.btn-red:focus {
+    @apply bg-red-400;
+}
