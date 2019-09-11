@@ -4,6 +4,8 @@
 @tailwind base;
 @tailwind components;
 
+@import 'lib/swipe';
+
 @import 'components/buttons';
 @import 'components/pills';
 @import 'components/alerts';

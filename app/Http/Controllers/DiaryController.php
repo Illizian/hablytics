@@ -69,16 +69,17 @@ class DiaryController extends Controller
         if (empty($diary)) return abort(404, "Diary not found with the ID $id!");
 
         // Actually get events from DiaryTag Model
-        $events = DiaryTag::where('diary_id', '=', $id)
-                            ->get()
-                            ->sortByDesc('at')
-                            ->take(10)
-                            ->load('tag')
-                            ->flatten();
+        $events = DiaryTag::where([
+            [ 'diary_id', '=', $id ],
+            [ 'at', '>=', Carbon::now()->subWeek() ]
+        ])
+            ->get()
+            ->load('tag')
+            ->groupByDateRange(Carbon::now()->subWeek(), Carbon::now(), 'at');
 
         return view('diaries.view', [
             'diary' => $diary,
-            'events' => $events,
+            'dates' => $events,
             'userFavourites' => $user->favouriteTags(),
             'diaryFavourites' => $diary->favouriteTags()
         ]);
