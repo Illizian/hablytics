@@ -27,5 +27,26 @@
         @endforeach
     </ul>
 
-    @include('partials/events-list')
+    <section class="swipe-container relative js-swipe-prev-active">
+        <div class="swipe-nav">
+            <button class="swipe-prev">
+                @svg('icons/chevron-left')
+            </button>
+            <div class="swipe-heading">
+                <span class="swipe-heading-text"></span>
+            </div>
+            <button class="swipe-next">
+                @svg('icons/chevron-right')
+            </button>
+        </div>
+        <div class="swipe z-10">
+            <ol class="swipe-wrap">
+                @foreach($dates as $date => $events)
+                    <li class="min-h-180 py-4" data-heading="{{ $date }}">
+                        @include('partials/events-list')
+                    </li>
+                @endforeach
+            </ol>
+        </div>
+    </section>
 @endsection

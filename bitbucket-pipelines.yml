@@ -31,10 +31,6 @@ definitions:
     public: public
 
 pipelines:
-  default:
-    - step: *Install
-    - step: *Build
-    - step: *Test
   branches:
     release/staging:
       - step: *Install

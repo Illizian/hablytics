@@ -9,6 +9,7 @@ module.exports = {
             },
             minHeight: {
                 'hero': '7.5rem',
+                '180': '11.25rem',
             },
             colors: {
                 'black-t-10': 'rgba(0,0,0,0.1)',

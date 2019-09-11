@@ -1,8 +1,6 @@
-<h2 class="font-bold">Latest Events</h2>
-
 @if(count($events) === 0)
     <p class="text-purple-700 font-light">
-        There are no events. Create your first now.
+        There are no events.
     </p>
 @endif
 
