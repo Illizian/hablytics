@@ -18,9 +18,16 @@
             </p>
 
             <label class="mb-4 block">
-                <span class="font-bold text-sm @if($errors->has('tag_id')) text-red-500 @else text-gray-700 @endif">{{ __('Select a tag') }}</span>
+                <span class="font-bold text-sm @if($errors->has('tag')) text-red-500 @else text-gray-700 @endif">{{ __('Select or Create a tag') }}</span>
 
-                <input name="tag" type="text" list="tags" class="form-input block w-full" value="{{ old('tag') }}" autofocus>
+                <input
+                    class="form-input block w-full @if($errors->has('tag')) border border-red-500 @endif"
+                    name="tag"
+                    type="text"
+                    list="tags"
+                    value="{{ old('tag') }}"
+                    autofocus
+                >
                 <datalist id="tags">
                     @foreach ($tags as $tag)
                         <option>
@@ -29,24 +36,7 @@
                     @endforeach
                 </datalist>
 
-                @error('tag_id')
-                    <span class="mt-2 alert alert-sm" role="alert">
-                        {{ $message }}
-                    </span>
-                @enderror
-            </label>
-
-            <label class="mb-4 block">
-                <span class="font-bold text-sm @if($errors->has('tag_name')) text-red-500 @else text-gray-700 @endif">{{ __('Tag Name') }}</span>
-                <input
-                    class="form-input block w-full @if($errors->has('tag_name')) border border-red-500 @endif"
-                    name="tag_name"
-                    type="text"
-                    placeholder="{{ __('Create a new tag') }}"
-                    value="{{ old('tag_name') }}"
-                />
-
-                @error('tag_name')
+                @error('tag')
                     <span class="mt-2 alert alert-sm" role="alert">
                         {{ $message }}
                     </span>
@@ -59,7 +49,7 @@
                     class="form-input block w-full @if($errors->has('at')) border border-red-500 @endif"
                     name="at"
                     type="datetime-local"
-                    {{-- max="{{ Carbon::now() }}" --}}
+                    max="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i') }}"
                     value="{{ old('at') }}"
                 />
 
