@@ -32,5 +32,6 @@ mix.js('resources/js/app.js', 'public/js')
             // to enable purgecss on production only
             ...process.env.NODE_ENV === 'production' ? [purgecss] : []
         ],
-    });
+    })
+    .version();
 
