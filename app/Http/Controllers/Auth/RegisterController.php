@@ -6,8 +6,11 @@ use App\User;
 use App\Diary;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+
+use App\Notifications\UserRegistered;
 
 class RegisterController extends Controller
 {
@@ -75,6 +78,10 @@ class RegisterController extends Controller
         ]);
 
         $user->diaries()->attach($diary);
+
+        // Notify Admin users
+        $admins = User::where('admin', true)->get();
+        Notification::sendNow($admins, new UserRegistered($user));
 
         return $user;
     }
