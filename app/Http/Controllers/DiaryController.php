@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 
 use App\Diary;
 use App\DiaryTag;
+use App\Http\Requests\CreateEventRequest;
 use App\Tag;
 
 class DiaryController extends Controller
@@ -97,7 +98,7 @@ class DiaryController extends Controller
         return view('events.create', [ 'tags' => $tags ]);
     }
 
-    public function postCreateEvent($id, Request $request)
+    public function postCreateEvent($id, CreateEventRequest $request)
     {
         $user = Auth::user();
         $diary = $user->diaries()->find($id);
