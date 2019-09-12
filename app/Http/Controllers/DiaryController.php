@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 use App\Diary;
 use App\DiaryTag;
@@ -102,16 +103,9 @@ class DiaryController extends Controller
         $diary = $user->diaries()->find($id);
         if (empty($diary)) return abort(404, "Diary not found with the ID $id!");
 
-        if ($request->filled('tag_name')) {
-            $tag = new Tag;
-            $tag->name = $request->input('tag_name');
-            $tag->save();
-        } else {
-            $tag_id = $request->input('tag_id');
-            $tag = Tag::find($tag_id);
-            if (empty($tag)) return abort(404, "Tag not found with the ID $tag_id!");
-        }
-
+        $tag = Tag::firstOrCreate([
+            'name' => Str::title($request->input('tag'))
+        ]);
 
         // Extract pivot values
         $pivot = [];

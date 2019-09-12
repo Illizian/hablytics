@@ -20,13 +20,14 @@
             <label class="mb-4 block">
                 <span class="font-bold text-sm @if($errors->has('tag_id')) text-red-500 @else text-gray-700 @endif">{{ __('Select a tag') }}</span>
 
-                <select name="tag_id" class="form-select block w-full @if($errors->has('tag_id')) border border-red-500 @endif">
+                <input name="tag" type="text" list="tags" class="form-input block w-full" value="{{ old('tag') }}" autofocus>
+                <datalist id="tags">
                     @foreach ($tags as $tag)
-                        <option value="{{ $tag->id }}" @if(old('tag_id') === $tag->id)selected @endif>
+                        <option>
                             {{ $tag->name }}
                         </option>
                     @endforeach
-                </select>
+                </datalist>
 
                 @error('tag_id')
                     <span class="mt-2 alert alert-sm" role="alert">
