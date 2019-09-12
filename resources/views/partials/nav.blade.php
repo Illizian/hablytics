@@ -8,7 +8,7 @@
             @svg('icons/menu')
         </label>
         <input id="menu-toggle" type="checkbox" class="hidden" />
-        <div id="menu" class="hidden absolute h-screen left-0 top-0 w-full z-10">
+        <div id="menu" class="hidden fixed inset-0 z-50">
             <div class="flex flex-col flex-grow bg-white shadow-md">
                 <div class="border-b-2 border-gray-300 py-4 px-2">
                     <h2 class="font-bold">
