@@ -16,7 +16,7 @@ class CreateEventRequest extends FormRequest
         return [
             'tag' => 'required|max:56',
             'at' => 'nullable|before:tomorrow',
-            'value' => 'nullable|digits:0,9999'
+            'value' => 'nullable|numeric'
         ];
     }
 }
