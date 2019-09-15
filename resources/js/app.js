@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         let swipe = new Swipe(el, {
             startSlide: items.length - 1,
             continuous: false,
-            transitionEnd: callback
+            callback: callback
         });
 
         navNext.addEventListener('click', swipe.next);
