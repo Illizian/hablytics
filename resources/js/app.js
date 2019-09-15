@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         }
 
         // Set audio Volumes
-        audioClick.volume = window._audioVolume || 0.4;
+        audioClick.volume = window._audioVolume || 0.2;
         audioSubmit.volume = window._audioVolume || 0.4;
 
         // Attach Event Handlers
