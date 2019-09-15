@@ -33,4 +33,62 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
         return swipe;
     });
+
+    // Enable any Quick-Event buttons
+    window._quickEvents = [...document.querySelectorAll('.quick-events')].map(form => {
+        let inputTag = form.querySelector('.quick-event-tag');
+        let inputValue = form.querySelector('.quick-event-value');
+        let audioClick = form.querySelector('.quick-event-audio-click');
+        let audioSubmit = form.querySelector('.quick-event-audio-submit');
+        let buttons = [...form.querySelectorAll('.quick-event-button')];
+        let quickEventAnimationKeyframes = [
+            { backgroundPositionX: '0%' },
+            { backgroundPositionX: '-200%' }
+        ];
+        let quickEventAnimationTimings = { duration: 2000, iterations: 1 };
+
+        // Set audio Volumes
+        audioClick.volume = window._audioVolume || 0.4;
+        audioSubmit.volume = window._audioVolume || 0.4;
+
+        let quickEventTimeout;
+        let quickEventCallback = () => {
+            audioSubmit.currentTime = 0;
+            audioSubmit.play();
+            form.submit();
+        }
+
+        let quickEventHandler = e => {
+            clearTimeout(quickEventTimeout);
+
+            let button = e.target;
+            if (button.value !== inputTag.value) {
+                // Clicked on a new Quick Event tag
+                inputTag.value = button.value;
+                inputValue.value = 1;
+            } else {
+                inputValue.value = parseInt(inputValue.value, 10) + 1;
+            }
+
+            buttons.forEach(button => {
+                button.classList.toggle('js-quick-event-selecting', button.value === inputTag.value);
+
+                let inner = button.querySelector('.quick-event-button-inner');
+                let value = button.querySelector('.quick-event-button-value');
+                if (button.value === inputTag.value) {
+                    value.innerText = inputValue.value;
+                    inner.animate(quickEventAnimationKeyframes, quickEventAnimationTimings);
+                } else {
+                    value.innerText = "";
+                }
+            });
+
+            console.log(audioClick.volume);
+            audioClick.currentTime = 0;
+            audioClick.play();
+            quickEventTimeout = setTimeout(quickEventCallback, 2000);
+        }
+
+        buttons.forEach(button => button.addEventListener('click', quickEventHandler));
+    });
 });

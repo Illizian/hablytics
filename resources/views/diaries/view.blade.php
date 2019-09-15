@@ -11,21 +11,38 @@
 @endsection
 
 @section('content')
-    <ul class="flex flex-wrap mb-2">
-        <li class="block mr-2 mb-2">
-            <a class="btn h-full flex items-center" href="/diary/{{ $diary->id }}/create">
-                @svg('icons/plus')
-            </a>
-        </li>
+    <form method="POST" action="/diary/{{ $diary->id }}/create" class="quick-events">
+        @csrf
+        <audio src="/assets/quick-event-click.wav" volume="0.1" class="quick-event-audio-click"></audio>
+        <audio src="/assets/quick-event-submit.wav" volume="0.1" class="quick-event-audio-submit"></audio>
+        <input type="hidden" name="tag" class="quick-event-tag" value="" />
+        <input type="hidden" name="value" class="quick-event-value" value="" />
 
-        @foreach($diaryFavourites as $favourite)
+        <ul class="flex flex-wrap mb-2">
             <li class="block mr-2 mb-2">
-                <a class="block btn btn-green" href="/diary/{{ $diary->id }}/create/{{ $favourite['tag']->id }}" data-count="{{ $favourite['count'] }}">
-                    {{ $favourite['tag']->name }}
+                <a class="btn h-full flex items-center" href="/diary/{{ $diary->id }}/create">
+                    @svg('icons/plus')
                 </a>
             </li>
-        @endforeach
-    </ul>
+
+            @foreach($diaryFavourites as $favourite)
+                <li class="block mr-2 mb-2">
+                    <button class="quick-event-button" type="button" value="{{ $favourite['tag']->name }}">
+                        <div class="quick-event-button-inner">
+                            <span class="quick-event-button-tag">{{ $favourite['tag']->name }}</span>
+                            <span class="quick-event-button-value"></span>
+                        </div>
+                    </button>
+                </li>
+            @endforeach
+
+            <li class="block mr-2 mb-2">
+                <button class="btn h-full">
+                    Submit
+                </a>
+            </li>
+        </ul>
+    </form>
 
     <section class="swipe-container relative js-swipe-prev-active">
         <div class="swipe-nav">

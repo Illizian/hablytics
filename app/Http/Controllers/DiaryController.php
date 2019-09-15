@@ -122,18 +122,4 @@ class DiaryController extends Controller
 
         return redirect("/diary/$id");
     }
-
-    public function quickEvent($id, $tag_id)
-    {
-        $user = Auth::user();
-        $diary = $user->diaries()->find($id);
-        if (empty($diary)) return abort(404, "Diary not found with the ID $id!");
-
-        $tag = Tag::find($tag_id);
-        if (empty($tag)) return abort(404, "Tag not found with the ID $tag_id!");
-
-        $diary->events()->attach($tag);
-
-        return redirect("/diary/$id");
-    }
 }
