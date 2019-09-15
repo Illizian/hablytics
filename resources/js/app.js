@@ -62,7 +62,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
          *
          * Called by the quickEventTimeout timer, once applicable time has passed
          */
-        let quickEventCallback = () => {
+        let quickEventCallback = (button) => {
+            button.classList.add('js-quick-event-submitting');
             audioSubmit.currentTime = 0;
             audioSubmit.play();
         }
@@ -109,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
             audioClick.play();
 
             // Setup a new "inactivity timer"
-            quickEventTimeout = setTimeout(quickEventCallback, (window._quickEventTimeout || 2000));
+            quickEventTimeout = setTimeout(quickEventCallback.bind(this, button), (window._quickEventTimeout || 2000));
         }
 
         // Set audio Volumes
