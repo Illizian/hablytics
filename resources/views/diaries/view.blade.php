@@ -6,7 +6,8 @@
 
 @section('header-content')
     <div class="text-white px-4 pt-4">
-        @svg('example-graph')
+        @component('components/chart', [ 'chart' => $chart ])
+        @endcomponent
     </div>
 @endsection
 
