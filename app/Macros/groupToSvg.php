@@ -28,7 +28,7 @@ class groupToSvg
             $min = $values->min('value');
             $cols = $values->count();
             $colWidth = ($width - ($gap * $cols)) / $cols;
-            $segmentHeight = $height / ($max - $min);
+            $segmentHeight = $height / max($max - $min, 1);
             $data = $values->map(function($column, $index) use ($width, $height, $gap, $colRadius, $colWidth, $segmentHeight) {
                 return array_merge($column, [
                     'height' => ($segmentHeight * $column['value']) + $colRadius,

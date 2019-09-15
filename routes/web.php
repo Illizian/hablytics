@@ -30,3 +30,4 @@ Route::get('/tags', 'TagController@index')->name('tag.index');
 Route::get('/tags/{id}', 'TagController@view')->name('tag.view');
 
 Route::get('/profile', 'UserProfileController@index')->name('profile.index');
+Route::delete('/profile', 'UserProfileController@remove')->name('profile.remove');

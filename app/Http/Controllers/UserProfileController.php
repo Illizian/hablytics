@@ -30,4 +30,18 @@ class UserProfileController extends Controller
             'user' => $user
         ]);
     }
+
+    /**
+     * Remove the User
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function remove()
+    {
+        $user = Auth::user();
+        $user->delete();
+        Auth::logout();
+
+        return redirect()->route('home');
+    }
 }
