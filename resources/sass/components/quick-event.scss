@@ -35,3 +35,11 @@
         }
     }
 }
+
+.quick-event-button.js-quick-event-submitting {
+    @apply bg-orange-500;
+
+    .quick-event-button-inner .quick-event-button-value {
+        @apply bg-orange-400;
+    }
+}
