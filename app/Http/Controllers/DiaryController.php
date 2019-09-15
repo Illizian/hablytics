@@ -77,7 +77,8 @@ class DiaryController extends Controller
         ])
             ->get()
             ->load('tag')
-            ->groupByDateRange(Carbon::now()->subWeek(), Carbon::now(), 'at');
+            ->groupByDateRange(Carbon::now()->subWeek(), Carbon::now(), 'at')
+            ->sortChildrenByDesc('at');
 
         return view('diaries.view', [
             'diary' => $diary,
