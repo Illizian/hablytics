@@ -66,7 +66,7 @@
                     <nav>
                         <ul class="flex border-t border-gray-300">
                             <li class="flex-grow border-r border-gray-300 p-2">
-                                <a href="#" class="btn block w-full text-left">
+                                <a class="btn block w-full text-left" href="{{ route('profile.index') }}">
                                     @svg('icons/user', 'inline-block mr-4')
                                     Profile
                                 </a>

@@ -19,4 +19,13 @@ class Format
 
         return "$diff, $formatted";
     }
+
+    public static function initials(string $string)
+    {
+        $words = explode(' ', $string);
+
+        return array_reduce($words, function($initials, $word) {
+            return $initials . $word[0];
+        }, "");
+    }
 }
