@@ -42,46 +42,82 @@ document.addEventListener('DOMContentLoaded', function(event) {
         let audioSubmit = form.querySelector('.quick-event-audio-submit');
         let buttons = [...form.querySelectorAll('.quick-event-button')];
 
-        // Set audio Volumes
-        audioClick.volume = window._audioVolume || 0.4;
-        audioSubmit.volume = window._audioVolume || 0.4;
 
+        /*
+         * @var int quickEventTimeout A timeout attached to quickEventCallback
+         */
         let quickEventTimeout;
-        let quickEventCallback = () => {
-            audioSubmit.currentTime = 0;
-            audioSubmit.play();
+
+        /*
+         * @function audioSubmitComplete
+         *
+         * Called once the submit sound has played completely
+         */
+        let audioSubmitComplete = () => {
             form.submit();
         }
 
+        /*
+         * @function quickEventCallback
+         *
+         * Called by the quickEventTimeout timer, once applicable time has passed
+         */
+        let quickEventCallback = () => {
+            audioSubmit.currentTime = 0;
+            audioSubmit.play();
+        }
+
+        /*
+         * @function quickEventHandler
+         *
+         * Handles clicks upon our quick event buttons.
+         */
         let quickEventHandler = e => {
+            // Clear our "inactivity timer"
             clearTimeout(quickEventTimeout);
 
+            // Extract values from the quick event target
             let button = e.target;
             if (button.value !== inputTag.value) {
-                // Clicked on a new Quick Event tag
+                // Clicked on a new Quick Event tag, so reset input values
                 inputTag.value = button.value;
                 inputValue.value = 1;
             } else {
+                // Clicked on a Quick Event tag for the second(+) time, increment the value input
                 inputValue.value = parseInt(inputValue.value, 10) + 1;
             }
 
+            // Iterate across all quick event buttons, and update them to reflect current state
             buttons.forEach(button => {
-                button.classList.toggle('js-quick-event-selecting', button.value === inputTag.value);
+                // Do this button match the current state?
+                let isMatch = (button.value === inputTag.value);
 
-                let inner = button.querySelector('.quick-event-button-inner');
+                // Grab the button's value label
                 let value = button.querySelector('.quick-event-button-value');
-                if (button.value === inputTag.value) {
+
+                // Update this button to match state
+                button.classList.toggle('js-quick-event-selecting', isMatch);
+                if (isMatch) {
                     value.innerText = inputValue.value;
                 } else {
                     value.innerText = "";
                 }
             });
 
+            // Play the click sound
             audioClick.currentTime = 0;
             audioClick.play();
-            quickEventTimeout = setTimeout(quickEventCallback, 2000);
+
+            // Setup a new "inactivity timer"
+            quickEventTimeout = setTimeout(quickEventCallback, (window._quickEventTimeout || 2000));
         }
 
+        // Set audio Volumes
+        audioClick.volume = window._audioVolume || 0.4;
+        audioSubmit.volume = window._audioVolume || 0.4;
+
+        // Attach Event Handlers
+        audioSubmit.addEventListener('ended', audioSubmitComplete)
         buttons.forEach(button => button.addEventListener('click', quickEventHandler));
     });
 });
