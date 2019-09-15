@@ -12,27 +12,22 @@
         .quick-event-button-tag,
         .quick-event-button-value {
             @apply inline-block;
-            // transition: all 0.2s ease-out;
         }
 
         .quick-event-button-tag {
-            @apply py-4 px-8;
+            @apply py-2 px-4;
         }
 
         .quick-event-button-value {
-            @apply hidden py-4 px-4 opacity-0 bg-green-400 rounded-lg;
+            @apply hidden py-2 px-2 opacity-0 bg-green-400 rounded-lg;
         }
     }
 }
 
 .quick-event-button.js-quick-event-selecting {
     .quick-event-button-inner {
-        background-repeat: no-repeat;
-        background-image: url('/assets/quick-event-background.svg');
-        background-position-x: -200%;
-
         .quick-event-button-tag {
-            @apply py-4 px-4;
+            @apply py-2 px-2;
         }
 
         .quick-event-button-value {
