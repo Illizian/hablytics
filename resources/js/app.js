@@ -41,11 +41,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
         let audioClick = form.querySelector('.quick-event-audio-click');
         let audioSubmit = form.querySelector('.quick-event-audio-submit');
         let buttons = [...form.querySelectorAll('.quick-event-button')];
-        let quickEventAnimationKeyframes = [
-            { backgroundPositionX: '0%' },
-            { backgroundPositionX: '-200%' }
-        ];
-        let quickEventAnimationTimings = { duration: 2000, iterations: 1 };
 
         // Set audio Volumes
         audioClick.volume = window._audioVolume || 0.4;
@@ -77,13 +72,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
                 let value = button.querySelector('.quick-event-button-value');
                 if (button.value === inputTag.value) {
                     value.innerText = inputValue.value;
-                    inner.animate(quickEventAnimationKeyframes, quickEventAnimationTimings);
                 } else {
                     value.innerText = "";
                 }
             });
 
-            console.log(audioClick.volume);
             audioClick.currentTime = 0;
             audioClick.play();
             quickEventTimeout = setTimeout(quickEventCallback, 2000);

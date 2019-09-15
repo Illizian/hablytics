@@ -35,12 +35,6 @@
                     </button>
                 </li>
             @endforeach
-
-            <li class="block mr-2 mb-2">
-                <button class="btn h-full">
-                    Submit
-                </a>
-            </li>
         </ul>
     </form>
 
