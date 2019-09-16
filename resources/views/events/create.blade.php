@@ -49,7 +49,7 @@
                     class="form-input block w-full @if($errors->has('at')) border border-red-500 @endif"
                     name="at"
                     type="datetime-local"
-                    max="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i') }}"
+                    max="{{ Carbon\Carbon::tomorrow()->subMinute(1)->format('Y-m-d\TH:i') }}"
                     value="{{ old('at') }}"
                 />
 
