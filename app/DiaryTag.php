@@ -19,7 +19,6 @@ class DiaryTag extends Pivot
      */
     public $incrementing = true;
 
-
     public function diary()
     {
         return $this->belongsTo('App\Diary');

@@ -1,4 +1,5 @@
 import Swipe from 'swipejs';
+import Confetti from 'canvas-confetti';
 
 document.addEventListener('DOMContentLoaded', function(event) {
     setTimeout(function() {
@@ -120,5 +121,22 @@ document.addEventListener('DOMContentLoaded', function(event) {
         // Attach Event Handlers
         audioSubmit.addEventListener('ended', audioSubmitComplete)
         buttons.forEach(button => button.addEventListener('click', quickEventHandler));
+    });
+
+    // "Closers"
+    window._closers = [...document.querySelectorAll('[data-closer]')].map(element => {
+        let selector = element.dataset.closer;
+        let target = document.querySelectorAll(selector);
+        if (target.length < 1) return console.log('Closer element target does not exists', selector, element);
+
+        return element.addEventListener('click', (e) => {
+            e.preventDefault();
+            target.forEach(el => el.classList.add('hidden'));
+        });
+    });
+
+    // Confetti
+    window._confetti = [...document.querySelectorAll('[data-confetti]')].map(element => {
+        Confetti();
     });
 });

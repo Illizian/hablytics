@@ -35,6 +35,8 @@
         </section>
     @endif
 
+    @include('partials/achievement-unlocked')
+
     @yield('scripts')
 </body>
 </html>

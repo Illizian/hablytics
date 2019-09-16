@@ -30,6 +30,8 @@
         @yield('content')
     </main>
 
+    @include('partials/achievement-unlocked')
+
     @yield('scripts')
 </body>
 </html>
