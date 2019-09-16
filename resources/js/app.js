@@ -77,6 +77,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
             // Clear our "inactivity timer"
             clearTimeout(quickEventTimeout);
 
+            // Play the click sound
+            audioClick.currentTime = 0;
+            audioClick.play();
+
             // Extract values from the quick event target
             let button = e.target;
             if (button.value !== inputTag.value) {
@@ -104,10 +108,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
                     value.innerText = "";
                 }
             });
-
-            // Play the click sound
-            audioClick.currentTime = 0;
-            audioClick.play();
 
             // Setup a new "inactivity timer"
             quickEventTimeout = setTimeout(quickEventCallback.bind(this, button), (window._quickEventTimeout || 2000));
