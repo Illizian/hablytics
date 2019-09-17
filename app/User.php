@@ -3,6 +3,7 @@
 namespace App;
 
 use Gstt\Achievements\Achiever;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,7 +12,7 @@ use App\Traits\UsesUuid;
 
 class User extends Authenticatable
 {
-    use Notifiable, UsesUuid, Achiever;
+    use Notifiable, UsesUuid, Achiever, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -38,6 +39,15 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'deleted_at'
     ];
 
     /**
