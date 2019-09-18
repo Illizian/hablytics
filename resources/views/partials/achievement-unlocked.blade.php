@@ -9,7 +9,7 @@
             </div>
 
             <div class="text-center">
-                <h3 class="font-bold text-xl">
+                <h3 class="mb-4 font-bold text-xl">
                     Achievement Unlocked
                 </h3>
 
@@ -20,6 +20,10 @@
                 <p>
                     {{ Session::get('achievement')->description }}
                 </p>
+
+                <a class="block mt-4 text-blue-400 font-bold" href="{{ route('profile.index') }}">
+                    See your achievements
+                </a>
             </div>
         </div>
     </div>
