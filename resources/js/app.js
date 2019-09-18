@@ -1,5 +1,11 @@
 import Swipe from 'swipejs';
 import Confetti from 'canvas-confetti';
+import { Howl } from 'howler';
+import AudioSpriteConfig from '../../public/audio/audiosprites.json';
+
+var sounds = new Howl(Object.assign({}, AudioSpriteConfig, {
+    volume: window._audioVolume || 0.2
+}));
 
 document.addEventListener('DOMContentLoaded', function(event) {
     setTimeout(function() {
@@ -43,20 +49,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
         let audioSubmit = form.querySelector('.quick-event-audio-submit');
         let buttons = [...form.querySelectorAll('.quick-event-button')];
 
-
         /*
          * @var int quickEventTimeout A timeout attached to quickEventCallback
          */
         let quickEventTimeout;
-
-        /*
-         * @function audioSubmitComplete
-         *
-         * Called once the submit sound has played completely
-         */
-        let audioSubmitComplete = () => {
-            form.submit();
-        }
 
         /*
          * @function quickEventCallback
@@ -65,8 +61,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
          */
         let quickEventCallback = (button) => {
             button.classList.add('js-quick-event-submitting');
-            audioSubmit.currentTime = 0;
-            audioSubmit.play();
+            sounds.play('quick-event-submit');
+            form.submit();
         }
 
         /*
@@ -79,8 +75,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
             clearTimeout(quickEventTimeout);
 
             // Play the click sound
-            audioClick.currentTime = 0;
-            audioClick.play();
+            sounds.play('quick-event-click');
 
             // Extract values from the quick event target
             let button = e.target;
@@ -114,12 +109,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
             quickEventTimeout = setTimeout(quickEventCallback.bind(this, button), (window._quickEventTimeout || 2000));
         }
 
-        // Set audio Volumes
-        audioClick.volume = window._audioVolume || 0.2;
-        audioSubmit.volume = window._audioVolume || 0.4;
-
         // Attach Event Handlers
-        audioSubmit.addEventListener('ended', audioSubmitComplete)
         buttons.forEach(button => button.addEventListener('click', quickEventHandler));
     });
 
