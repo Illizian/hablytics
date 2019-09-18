@@ -1,4 +1,4 @@
-<svg class="" width="{{ $chart['width'] }}px" height="{{ $chart['height'] }}px" viewBox="0 0 {{ $chart['width'] }} {{ $chart['height'] }}" xmlns="http://www.w3.org/2000/svg">
+<svg class="{{ $class ?? '' }}" width="{{ $chart['width'] }}px" height="{{ $chart['height'] }}px" viewBox="0 0 {{ $chart['width'] }} {{ $chart['height'] }}" xmlns="http://www.w3.org/2000/svg">
     @foreach($chart['data'] as $column)
         @if($column['value'] === 0)
             <rect
