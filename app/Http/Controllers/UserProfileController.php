@@ -30,7 +30,13 @@ class UserProfileController extends Controller
         $user = Auth::user();
 
         return view('profile.index', [
-            'user' => $user
+            'user' => $user,
+            'achievements' => $user->achievements->sort(function($a, $b) {
+                return (
+                    ($a->details->points - $a->points) >
+                    ($b->details->points - $b->points)
+                ) ? 1 : -1;
+            })->all()
         ]);
     }
 

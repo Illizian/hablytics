@@ -26,11 +26,11 @@
             @endif
         </div>
 
-        <div class="mb-4 pb-4 border-b border-gray-300">
+        <div class="mb-2 border-b border-gray-300">
             <label class="block mb-4 font-bold">Achievements</label>
 
-            <div class="-m-2 flex flex-wrap">
-                @each('partials/achievement', $user->achievements, 'achievement')
+            <div>
+                @each('partials/achievement', $achievements, 'achievement')
             </div>
         </div>
 
