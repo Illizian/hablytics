@@ -25,5 +25,18 @@ body {
     @apply flex;
 }
 
+progress[value] {
+    @apply rounded overflow-hidden appearance-none;
+
+    &::-webkit-progress-bar {
+        @apply bg-gray-300;
+    }
+
+    &::-webkit-progress-value {
+        @apply bg-green-500;
+    }
+}
+
+
 @tailwind utilities;
 
