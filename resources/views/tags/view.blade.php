@@ -34,5 +34,22 @@
 @endsection
 
 @section('content')
-    @include('partials/events-list')
+    <div class="mb-4 overflow-x-scroll rtl">
+        @component('components/chart', [ 'chart' => $chart ])
+        @endcomponent
+    </div>
+
+    <h4 class="font-bold">
+
+    @foreach($dates as $date => $events)
+        @if(count($events) > 0)
+            <div class="pb-4 mb-4 border-b border-gray-300">
+                <h4 class="font-bold">{{ App\Helpers\Format::date($date) }}</h4>
+
+                @include('partials/events-list')
+            </div>
+        @else
+            <span class="event-ellipsis"></span>
+        @endif
+    @endforeach
 @endsection

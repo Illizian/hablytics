@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 use App\Tag;
@@ -36,21 +37,30 @@ class TagController extends Controller
 
         // Find all events with this tag that have occurred within a diary
         // this user has access to
-        $events = DiaryTag::where('tag_id', '=', $id)
-                            ->whereIn('diary_id', $user->diaries()->get()->pluck('id'))
-                            ->get()
-                            ->sortByDesc('at')
-                            ->flatten();
+        $data = DiaryTag::where('tag_id', '=', $id)
+                        ->whereIn('diary_id', $user->diaries()->get()->pluck('id'))
+                        ->whereDate('at', '>=', Carbon::now()->subDays(30)->format('Y-m-d'))
+                        ->get()
+                        ->load('tag')
+                        ->sortByDesc('at')
+                        ->flatten();
 
-        $lastUsed = $events->first()->at;
-        $count = $events->count();
-        $value = $events->sum(function($event) {
+        // Generate Meta data
+        $lastUsed = $data->first()->at;
+        $count = $data->count();
+        $value = $data->sum(function($event) {
             return (int) $event->value ?: 1;
         });
 
+        // Generate a 30day chart
+        $grouped = $data->groupByDateRange(Carbon::now()->subDays(30), Carbon::now(), 'at');
+        $events = $grouped->sortChildrenByDesc('at')->reverse();
+        $chart = $grouped->groupToSvg(1280, 300, 8, 8);
+
         return view('tags.view', [
             'tag' => $tag,
-            'events' => $events->take(10),
+            'dates' => $events,
+            'chart' => $chart,
             'lastUsed' => $lastUsed,
             'count' => $count,
             'value' => $value,

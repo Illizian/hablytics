@@ -36,3 +36,15 @@
         @apply bg-gray-500;
     }
 }
+
+.event-ellipsis {
+    @apply block mb-4 pb-4 h-12 border-dotted border-l-8 border-gray-300;
+
+    & + & {
+        display: none;
+    }
+
+    & + div {
+        @apply pt-4 border-t border-gray-300;
+    }
+}
