@@ -12,7 +12,10 @@
     "devDependencies": {
         "@fullhuman/postcss-purgecss": "^1.2.0",
         "@tailwindcss/custom-forms": "^0.2.0",
+        "audiosprite": "^0.7.1",
         "axios": "^0.18",
+        "browser-sync": "^2.26.7",
+        "browser-sync-webpack-plugin": "^2.2.2",
         "bootstrap": "^4.1.0",
         "cross-env": "^5.1",
         "jquery": "^3.2",
@@ -29,9 +32,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "browser-sync": "^2.26.7",
-        "browser-sync-webpack-plugin": "^2.2.2",
         "canvas-confetti": "^0.4.0",
+        "howler": "^2.1.2",
         "swipejs": "^2.2.14"
     }
 }

@@ -13,6 +13,7 @@ definitions:
     - step: &Build
         name: Build
         script:
+          - npx audiosprite -f howler2 -o public/audio/audiosprites -u /audio resources/audio/*.wav
           - npm run prod
         artifacts:
           - public/**

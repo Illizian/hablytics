@@ -14,8 +14,6 @@
 @section('content')
     <form method="POST" action="/diary/{{ $diary->id }}/create" class="quick-events">
         @csrf
-        <audio src="/assets/quick-event-click.wav" volume="0.1" class="quick-event-audio-click"></audio>
-        <audio src="/assets/quick-event-submit.wav" volume="0.1" class="quick-event-audio-submit"></audio>
         <input type="hidden" name="tag" class="quick-event-tag" value="" />
         <input type="hidden" name="value" class="quick-event-value" value="" />
 
