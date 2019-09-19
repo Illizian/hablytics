@@ -29,12 +29,6 @@
         @yield('content')
     </main>
 
-    @if(View::hasSection('action-bar'))
-        <section class="absolute bottom-5 right-5">
-            @yield('action-bar')
-        </section>
-    @endif
-
     @include('partials/achievement-unlocked')
 
     @yield('scripts')
