@@ -34,7 +34,7 @@ class groupToSvg
                     'height' => ($segmentHeight * $column['value']) + $colRadius,
                     'width' => $colWidth,
                     'x' => ($colWidth + $gap) * $index,
-                    'y' => ($height - ($segmentHeight * $column['value'])) + $colRadius
+                    'y' => ($height - ($segmentHeight * $column['value']))
                 ]);
             });
 
