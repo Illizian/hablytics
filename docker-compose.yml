@@ -2,10 +2,8 @@ version: "3"
 
 services:
   www:
-    tty: true
-    image: lorisleiva/laravel-docker:latest
+    image: bitnami/laravel:6.0.2
     user: "1000:1000"
-    command: php artisan serve --host=0.0.0.0 --port=3000
     environment:
       - DB_CONNECTION=mysql
       - DB_HOST=mysql
@@ -17,7 +15,7 @@ services:
       - REDIS_PASSWORD=null
       - REDIS_PORT=6379
     volumes:
-      - .:/var/www
+      - .:/app
     ports:
       - 3000:3000 # Laravel Server
       - 3001:3001 # BrowserSync UI
