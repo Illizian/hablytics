@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\UpdateUserSubscriptionRequest;
 use App\Notifications\DailyPrompt;
+use App\User;
 
 class UserController extends Controller
 {
@@ -53,7 +54,7 @@ class UserController extends Controller
         // Check is user has requested the notification be sent to
         // another user
         if ($request->filled('user')) {
-            $user = User::find($request->input);
+            $user = User::find($request->input('user'));
         }
         // Check we still have a valid user
         if (!$user) return response()->json(null, 404);
@@ -61,6 +62,6 @@ class UserController extends Controller
         // Send the selected user a DailyPrompt notification
         $user->notify(new DailyPrompt);
 
-        return response()->json(null, 204);
+        return "Push Dispatched!";
     }
 }
