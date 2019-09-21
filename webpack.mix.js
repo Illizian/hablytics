@@ -19,6 +19,7 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
 
 
 mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/service-worker.js', 'public/')
     .sass('resources/sass/app.scss', 'public/css')
     .browserSync({
         open: false,

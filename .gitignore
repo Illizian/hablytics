@@ -7,6 +7,7 @@
 /public/hot
 /public/js
 /public/mix-manifest.json
+/public/service-worker.js
 /public/storage
 /vendor
 Homestead.json
