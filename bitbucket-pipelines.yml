@@ -13,7 +13,8 @@ definitions:
     - step: &Build
         name: Build
         script:
-          - apt update && apt install ffmpeg -y
+          - apt update
+          - apt install ffmpeg -y
           - npx audiosprite -f howler2 -o public/audio/audiosprites -u /audio resources/audio/*.wav
           - npm run prod
         artifacts:
