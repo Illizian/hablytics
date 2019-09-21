@@ -13,6 +13,7 @@ definitions:
     - step: &Build
         name: Build
         script:
+          - sudo mkdir -p /var/lib/apt/lists/partial
           - apt update
           - apt install ffmpeg -y
           - npx audiosprite -f howler2 -o public/audio/audiosprites -u /audio resources/audio/*.wav
