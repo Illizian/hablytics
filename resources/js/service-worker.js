@@ -77,9 +77,10 @@ self.addEventListener('push', function(e) {
     return e.waitUntil(self.registration.showNotification(title, options));
 });
 
-self.addEventListener('notificationclick', function(event) {
-    if (!event.action) return;
+self.addEventListener('notificationclick', function(e) {
+    if (!e.action) return e.notification.close();
 
     // The only actions sent will be URLs
-    clients.openWindow(event.action);
+    clients.openWindow(e.action);
+    e.notification.close();
 });
