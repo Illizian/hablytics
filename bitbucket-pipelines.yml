@@ -1,9 +1,10 @@
-image: bitnami/laravel:6.0.2
+image: lorisleiva/laravel-docker:7.3
 
 definitions:
   steps:
     - step: &Install
         name: Install
+        image: bitnami/laravel:6.0.2
         script:
           - npm install
           - composer install
@@ -13,9 +14,7 @@ definitions:
     - step: &Build
         name: Build
         script:
-          - sudo mkdir -p /var/lib/apt/lists/partial
-          - sudo apt update
-          - sudo apt install ffmpeg -y
+          - apk add ffmpeg
           - npx audiosprite -f howler2 -o public/audio/audiosprites -u /audio resources/audio/*.wav
           - npm run prod
         artifacts:
@@ -23,6 +22,7 @@ definitions:
           - vendor/**
     - step: &Test
         name: Test
+        image: bitnami/laravel:6.0.2
         script:
           - phpunit --coverage-text --colors=never
     - step: &Deploy
