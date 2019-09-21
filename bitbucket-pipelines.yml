@@ -1,4 +1,4 @@
-image: lorisleiva/laravel-docker:7.3
+image: bitnami/laravel:6.0.2
 
 definitions:
   steps:

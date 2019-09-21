@@ -4,12 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- PWA -->
+    <meta name="theme-color" content="#4299E1">
+    <link rel="manifest" href="/app.webmanifest">
+    <link rel="icon" sizes="192x192" href="/icons/icon-xxxhdpi.png">
+    <link rel="apple-touch-icon" href="/icons/icon-xhdpi.png">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script>
+        window._vapidPublicKey = "{{ config('webpush.vapid.public_key') }}";
+    </script>
     <script src="{{ mix('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -24,7 +33,6 @@
 
         @yield('header-content')
     </header>
-
     <div class="h-4 bg-blue-500"></div>
     <main class="-mt-4 px-8 py-4 bg-gray-100 rounded-tr-xl">
         @yield('content')

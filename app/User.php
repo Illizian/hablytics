@@ -3,16 +3,17 @@
 namespace App;
 
 use Gstt\Achievements\Achiever;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use NotificationChannels\WebPush\HasPushSubscriptions;
 
 use App\Traits\UsesUuid;
 
 class User extends Authenticatable
 {
-    use Notifiable, UsesUuid, Achiever, SoftDeletes;
+    use Notifiable, UsesUuid, Achiever, SoftDeletes, HasPushSubscriptions;
 
     /**
      * The attributes that are mass assignable.

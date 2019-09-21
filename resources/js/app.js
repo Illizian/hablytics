@@ -1,16 +1,35 @@
+import $ from 'axios';
 import Swipe from 'swipejs';
 import Confetti from 'canvas-confetti';
 import { Howl } from 'howler';
 import AudioSpriteConfig from '../../public/audio/audiosprites.json';
 
+const PushManagerOptions = {
+    userVisibleOnly: true,
+    applicationServerKey: urlBase64ToUint8Array(window._vapidPublicKey)
+};
+
 var sounds = new Howl(Object.assign({}, AudioSpriteConfig, {
     volume: window._audioVolume || 0.2
 }));
 
+if ('serviceWorker' in navigator) {
+    // Register our service worker if compatible
+    navigator.serviceWorker.register('/service-worker.js')
+        .then(() => navigator.serviceWorker.ready)
+        .then(reg => {
+            reg.pushManager.getSubscription()
+                .then(sub => {
+                    if (sub != null) return updateSubscription(sub);
+
+                    return reg.pushManager.subscribe(PushManagerOptions).then(updateSubscription);
+                });
+        });
+}
+
 document.addEventListener('DOMContentLoaded', function(event) {
-    setTimeout(function() {
-        document.body.classList.add('js-loaded');
-    });
+    // Update any styles according
+    document.body.classList.add('js-loaded');
 
     // Enable any Swipe-able areas
     window._swipeables = [...document.querySelectorAll('.swipe-container')].map(container => {
@@ -130,3 +149,38 @@ document.addEventListener('DOMContentLoaded', function(event) {
         Confetti();
     });
 });
+
+function urlBase64ToUint8Array(base64String) {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding)
+        .replace(/-/g, '+')
+        .replace(/_/g, '/');
+
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+
+    for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+
+    return outputArray;
+}
+
+function updateSubscription(subscription) {
+    let { endpoint } = subscription;
+    let key = subscription.getKey('p256dh')
+    let token = subscription.getKey('auth')
+    let contentEncoding = (PushManager.supportedContentEncodings || ['aesgcm'])[0]
+
+    return $.post(
+        '/user/subscription',
+        {
+            endpoint,
+            contentEncoding,
+            key: key ? btoa(String.fromCharCode.apply(null, new Uint8Array(key))) : null,
+            token: token ? btoa(String.fromCharCode.apply(null, new Uint8Array(token))) : null,
+        },
+        {
+            withCredentials: true
+        });
+}
