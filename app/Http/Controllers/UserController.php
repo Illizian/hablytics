@@ -49,11 +49,11 @@ class UserController extends Controller
     public function testSubscription(Request $request)
     {
         $user = $request->user();
-        // Check current user has admin priviledges
-        if (!$user->admin) return response()->json(null, 401);
         // Check is user has requested the notification be sent to
         // another user
         if ($request->filled('user')) {
+            // Check current user has admin priviledges
+            if (!$user->admin) return response()->json(null, 401);
             $user = User::find($request->input('user'));
         }
         // Check we still have a valid user
