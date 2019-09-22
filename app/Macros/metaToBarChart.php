@@ -31,7 +31,7 @@ class metaToBarChart
                 if (empty($count)) {
                     $props['height'] = 1;
                     $props['radius'] = 0;
-                    $props['y'] = 0;
+                    $props['y'] = $height - 1;
                 } else {
                     $props['height'] = ($segmentHeight * $count) + $radius;
                     $props['radius'] = $radius;
