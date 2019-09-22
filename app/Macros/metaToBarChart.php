@@ -19,22 +19,23 @@ class metaToBarChart
             $min = $this->get('min');
             $columns = $this->get('count');
             $colWidth = ($width - ($gap * $columns)) / $columns;
+            $segmentHeight = $height / max($max - $min, 1);
 
-            $data = $this->get('data')->map(function($column, $index) use ($height, $gap, $radius, $colWidth) {
-                $percentage = $column->get('percentage');
-                $value = $height * $percentage;
+            $data = $this->get('data')->map(function($column, $index) use ($height, $gap, $radius, $colWidth, $segmentHeight) {
+                $count = $column->get('count');
                 $props = [
                     'width' => $colWidth,
-                    'x' => ($colWidth + $gap) * $index,
-                    'y' => $height - $value
+                    'x' => ($colWidth + $gap) * $index
                 ];
 
-                if (empty($percentage)) {
+                if (empty($count)) {
                     $props['height'] = 1;
                     $props['radius'] = 0;
+                    $props['y'] = 0;
                 } else {
-                    $props['height'] = $value + $radius;
+                    $props['height'] = ($segmentHeight * $count) + $radius;
                     $props['radius'] = $radius;
+                    $props['y'] = $height - ($segmentHeight * $count);
                 }
 
                 return collect(array_merge($column->toArray(), $props));
