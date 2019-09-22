@@ -1,22 +1,29 @@
-<svg class="{{ $class ?? '' }}" width="{{ $chart['width'] }}px" height="{{ $chart['height'] }}px" viewBox="0 0 {{ $chart['width'] }} {{ $chart['height'] }}" xmlns="http://www.w3.org/2000/svg">
-    @foreach($chart['data'] as $column)
-        @if($column['value'] === 0)
+<svg
+    class="{{ $class ?? '' }}"
+    width="{{ $chart->get('width') }}px"
+    height="{{ $chart->get('height') }}px"
+    viewBox="0 0 {{ $chart->get('width') }} {{ $chart->get('height') }}"
+    xmlns="http://www.w3.org/2000/svg"
+>
+    @foreach($chart->get('data') as $column)
+        @if($column->get('percentage') > 0)
             <rect
-                height="1"
-                width="{{ $column['width'] }}"
-                x="{{ $column['x'] }}"
-                y="{{ $chart['height'] - 1 }}"
+                height="{{ $column->get('height') }}"
+                width="{{ $column->get('width') }}"
+                x="{{ $column->get('x') }}"
+                y="{{ $column->get('y') }}"
+                ry="{{ $column->get('radius') }}"
                 fill="currentColor"
             />
         @else
             <rect
-                height="{{ $column['height'] }}"
-                width="{{ $column['width'] }}"
-                x="{{ $column['x'] }}"
-                y="{{ $column['y'] }}"
-                ry="{{ $chart['colRadius'] }}"
+                height="1"
+                width="{{ $column->get('width') }}"
+                x="{{ $column->get('x') }}"
+                y="{{ $chart->get('height') - 1 }}"
                 fill="currentColor"
             />
         @endif
     @endforeach
 </svg>
+

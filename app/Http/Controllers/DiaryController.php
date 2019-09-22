@@ -80,7 +80,7 @@ class DiaryController extends Controller
             ->groupByDateRange(Carbon::now()->subWeek(), Carbon::now(), 'at')
             ->sortChildrenByDesc('at');
 
-        $chart = $events->groupToSvg(400, 225);
+        $chart = $events->groupToMeta()->metaToBarChart(400, 225);
 
         return view('diaries.view', [
             'diary' => $diary,
