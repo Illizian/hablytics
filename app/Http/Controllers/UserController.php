@@ -81,10 +81,11 @@ class UserController extends Controller
         $from = $to->copy()->subWeek(1);
 
         // Get events from DiaryTag Model
+        $diary_ids = $request->user()->diaries()->get()->pluck('id');
         $events = DiaryTag::where([
             [ 'at', '>=', $from ],
             [ 'at', '<=', $to ]
-        ])->whereIn('diary_id', $user->diaries()->get()->pluck('id'))->get();
+        ])->whereIn('diary_id', $diary_ids)->get();
 
         // Get Achievements
         $achievements = $request->user()->achievements()->where([
