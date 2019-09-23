@@ -34,3 +34,4 @@ Route::post('/profile', 'UserProfileController@update')->name('profile.update');
 
 Route::post('/user/subscription', 'UserController@updateSubscription')->name('user.updateSubscription');
 Route::get('/user/subscription/test', 'UserController@testSubscription')->name('user.testSubscription');
+Route::get('/user/reports/weekly', 'UserController@reportsWeekly')->name('user.reportsWeekly');

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 use App\Http\Requests\UpdateUserSubscriptionRequest;
 use App\Notifications\DailyPrompt;
 use App\User;
+use App\DiaryTag;
 
 class UserController extends Controller
 {
@@ -63,5 +65,39 @@ class UserController extends Controller
         $user->notify(new DailyPrompt);
 
         return "Push Dispatched!";
+    }
+
+    /**
+     * View User's Weekly Report
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function reportsWeekly(Request $request)
+    {
+        // Get the date range for this Report
+        $to = Carbon::parse('last Sunday');
+        $from = $to->copy()->subWeek(1);
+
+        // Get events from DiaryTag Model
+        $events = DiaryTag::where([
+            [ 'at', '>=', $from ],
+            [ 'at', '<=', $to ]
+        ])->get();
+
+        // Get Achievements
+        $achievements = $request->user()->achievements()->where([
+            [ 'unlocked_at', '>=', $from ],
+            [ 'unlocked_at', '<=', $to ]
+        ])->get();
+
+        // Sumarise the $events
+        $chart = $events->groupBy('tag.name')->groupToMeta()->metaToPieChart();
+
+        // Get the largest tag (by value)
+        $largest = $events->sortByDesc('value')->first();
+
+        return view('user.reports.weekly', compact('to', 'from', 'events', 'largest', 'achievements', 'chart'));
     }
 }

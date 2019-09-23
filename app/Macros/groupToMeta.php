@@ -31,6 +31,8 @@ class groupToMeta
                 return collect(array_merge($column, [
                     'percentage' => round($column['count'] / $total, 2)
                 ]));
+            })->sort(function($a, $b) {
+                return ($a->get('count') < $b->get('count')) ? -1 : 1;
             });
 
             return collect(compact(
