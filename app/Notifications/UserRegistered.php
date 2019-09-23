@@ -14,7 +14,7 @@ class UserRegistered extends Notification
      */
     public function __construct(App $user)
     {
-        $body = "${ $user->name } has registered.".
+        $body = "${ $user->name } has registered.";
 
         if (! $user->approved) {
             $body .= ' They require approval, please visit the admin area.';
