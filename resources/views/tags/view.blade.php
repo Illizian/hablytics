@@ -35,7 +35,7 @@
 
 @section('content')
     <div class="mb-4 overflow-x-scroll rtl">
-        @component('components/chart', [ 'chart' => $chart ])
+        @component('components/bar-chart', [ 'chart' => $chart ])
         @endcomponent
     </div>
 

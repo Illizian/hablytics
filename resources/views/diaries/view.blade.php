@@ -6,7 +6,7 @@
 
 @section('header-content')
     <div class="text-white px-4 pt-4">
-        @component('components/chart', [ 'chart' => $chart, 'class' => 'w-full h-auto' ])
+        @component('components/bar-chart', [ 'chart' => $chart, 'class' => 'w-full h-auto' ])
         @endcomponent
     </div>
 @endsection
