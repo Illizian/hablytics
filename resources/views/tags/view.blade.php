@@ -9,7 +9,7 @@
 @endsection
 
 @section('header-content')
-    <div class="m-4 p-4 text-white bg-blue-400 rounded-xl shadow-inner">
+    <div class="mt-4 mb-2 p-4 text-white bg-blue-400 rounded-xl shadow-inner">
         <div class="flex">
             <div class="flex-grow">
                 <label class="block font-bold">Total</label>

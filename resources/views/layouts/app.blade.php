@@ -34,7 +34,7 @@
         @yield('header-content')
     </header>
 
-    <main class="-mt-8 px-8 pb-4">
+    <main class="-mt-8 px-4 pb-4">
         @yield('content')
     </main>
 

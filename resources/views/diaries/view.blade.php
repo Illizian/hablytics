@@ -5,7 +5,7 @@
 @endsection
 
 @section('header-content')
-    <div class="text-white px-4 pt-4">
+    <div class="text-white pt-4 pb-2">
         @component('components/bar-chart', [ 'chart' => $chart, 'class' => 'w-full h-auto' ])
         @endcomponent
     </div>

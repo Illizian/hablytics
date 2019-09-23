@@ -34,7 +34,7 @@
         @yield('header-content')
     </header>
     <div class="h-4 bg-blue-500"></div>
-    <main class="-mt-4 px-8 py-4 bg-gray-100 rounded-tr-xl">
+    <main class="-mt-4 px-4 py-4 bg-gray-100 rounded-tr-xl">
         @yield('content')
     </main>
 
