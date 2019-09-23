@@ -55,7 +55,7 @@ class TagController extends Controller
         // Generate a 30day chart
         $grouped = $data->groupByDateRange(Carbon::now()->subDays(30), Carbon::now(), 'at');
         $events = $grouped->sortChildrenByDesc('at')->reverse();
-        $chart = $grouped->groupToSvg(1280, 300, 8, 8);
+        $chart = $grouped->groupToMeta()->metaToBarChart(1280, 300, 8, 8);
 
         return view('tags.view', [
             'tag' => $tag,
