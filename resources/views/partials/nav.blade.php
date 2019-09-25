@@ -60,6 +60,22 @@
                                     @svg('icons/chevron-right')
                                 </a>
                             </li>
+                            <li class="border-b border-gray-300">
+                                <a class="flex py-4 px-2 text-gray-500" href="{{ route('goals.index') }}">
+                                    <span class="flex-grow">
+                                        Goals
+                                    </span>
+                                    @svg('icons/chevron-right')
+                                </a>
+                            </li>
+                            <li class="border-b border-gray-300">
+                                <a class="flex py-4 px-2 text-gray-500" href="{{ route('integrate.index') }}">
+                                    <span class="flex-grow">
+                                        Integrate
+                                    </span>
+                                    @svg('icons/chevron-right')
+                                </a>
+                            </li>
                         </ul>
                     </nav>
 
