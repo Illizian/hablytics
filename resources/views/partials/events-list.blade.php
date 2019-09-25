@@ -6,7 +6,7 @@
 
 <ul class="events-list" style="--list-transition-delay: {{ count($events) * 0.1 }}s;">
     @foreach($events as $event)
-        <li class="my-1 event flex items-center" style="--event-transition-delay: {{ $loop->index * 0.1 }}s;">
+        <li class="my-1 event" style="--event-transition-delay: {{ $loop->index * 0.1 }}s;">
             <a class="ml-2" href="/diary-tag/{{ $event->id }}">
                 {{ $event->tag->name }}
             </a>

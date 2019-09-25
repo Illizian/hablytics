@@ -25,6 +25,8 @@
 }
 
 .events-list .event {
+    @apply flex items-center;
+
     &:before {
         @apply block bg-transparent rounded-full h-2 w-2;
         content: "";
