@@ -39,8 +39,6 @@
         @endcomponent
     </div>
 
-    <h4 class="font-bold">
-
     @foreach($dates as $date => $events)
         @if(count($events) > 0)
             <div class="pb-4 mb-4 border-b border-gray-300">
