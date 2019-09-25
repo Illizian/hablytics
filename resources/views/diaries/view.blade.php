@@ -49,10 +49,10 @@
                 @svg('icons/chevron-right')
             </button>
         </div>
-        <div class="swipe z-10">
+        <div class="swipe -mx-4 z-10">
             <ol class="swipe-wrap">
                 @foreach($dates as $date => $events)
-                    <li class="min-h-180 py-4" data-heading="{{ App\Helpers\Format::date($date) }}">
+                    <li class="min-h-180 p-4" data-heading="{{ App\Helpers\Format::date($date) }}">
                         @include('partials/events-list')
                     </li>
                 @endforeach

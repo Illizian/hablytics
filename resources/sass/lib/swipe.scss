@@ -1,47 +1,47 @@
-.swipe {
-    overflow: hidden;
-    visibility: hidden;
-    position: relative;
-}
+.swipe-container {
+    .swipe-nav {
+        @apply flex border-b pb-4;
 
-.swipe-nav {
-    @apply flex border-b pb-4;
+        .swipe-prev,
+        .swipe-next {
+            @apply p-4 bg-gray-300 text-gray-400;
+            transition: color 0.2s linear;
+        }
 
-    .swipe-prev,
-    .swipe-next {
-        @apply p-4 bg-gray-300 text-gray-400;
-        transition: color 0.2s linear;
+        .swipe-prev {
+            @apply left-0;
+        }
+        .swipe-next {
+            @apply right-0;
+        }
+
+        .swipe-heading {
+            @apply flex flex-grow items-center justify-center text-lg font-bold;
+        }
+
     }
 
-    .swipe-prev {
-        @apply left-0;
+    &.js-swipe-prev-active .swipe-prev {
+        @apply text-gray-700;
+    }
 
-        .swipe-container.js-swipe-prev-active & {
-            @apply text-gray-700;
+    &.js-swipe-next-active .swipe-next {
+        @apply text-gray-700;
+    }
+
+    .swipe {
+        @apply overflow-hidden invisible relative;
+
+        .swipe-wrap {
+            overflow: hidden;
+            position: relative;
+
+            > li {
+                float: left;
+                width: 100%;
+                position: relative;
+                overflow: hidden;
+            }
         }
     }
-
-    .swipe-heading {
-        @apply flex flex-grow items-center justify-center text-lg font-bold;
-    }
-
-    .swipe-next {
-        @apply right-0;
-
-        .swipe-container.js-swipe-next-active & {
-            @apply text-gray-700;
-        }
-    }
-}
-
-.swipe-wrap {
-    overflow: hidden;
-    position: relative;
-}
-
-.swipe-wrap > li {
-    float: left;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
 }
