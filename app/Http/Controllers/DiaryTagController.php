@@ -9,6 +9,16 @@ use App\DiaryTag;
 
 class DiaryTagController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'approved']);
+    }
+
     public function view($id)
     {
         $user = Auth::user();
