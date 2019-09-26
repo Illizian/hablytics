@@ -15,6 +15,8 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/approval', 'HomeController@approval')->name('approval');
+Route::get('/terms', 'HomeController@terms')->name('terms');
+Route::get('/privacy', 'HomeController@privacy')->name('privacy');
 
 Route::get('/diary', 'DiaryController@index')->name('diary.index');
 Route::get('/diary/create', 'DiaryController@create')->name('diary.create');

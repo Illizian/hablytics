@@ -27,4 +27,14 @@ class HomeController extends Controller
 
         return view('auth.approval');
     }
+
+    public function terms()
+    {
+        return view('terms');
+    }
+
+    public function privacy()
+    {
+        return view('privacy');
+    }
 }
