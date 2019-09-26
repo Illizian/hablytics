@@ -33,19 +33,21 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     // Enable any Swipe-able areas
     window._swipeables = [...document.querySelectorAll('.swipe-container')].map(container => {
-        let el = container.querySelector('.swipe');
+        let body = document.querySelector('body');
+        let element = container.querySelector('.swipe');
         let navHead = container.querySelector('.swipe-heading-text');
         let navNext = container.querySelector('.swipe-next');
         let navPrev = container.querySelector('.swipe-prev');
-        let items = el.querySelectorAll('.swipe-wrap > li');
+        let items = container.querySelectorAll('.swipe-wrap > li');
 
         let callback = function(index, el) {
+            body.dataset.swipeActive = index;
             navHead.innerText = el.dataset.heading;
             container.classList.toggle('js-swipe-next-active', index !== (items.length - 1));
             container.classList.toggle('js-swipe-prev-active', index !== 0);
         }
 
-        let swipe = new Swipe(el, {
+        let swipe = new Swipe(element, {
             startSlide: items.length - 1,
             continuous: false,
             callback: callback
@@ -53,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
         navNext.addEventListener('click', swipe.next);
         navPrev.addEventListener('click', swipe.prev);
+        document.addEventListener('swipe-slide', e => swipe.slide(e.detail));
 
         // Initialise, by firing callback
         callback(items.length - 1, items[items.length - 1]);
@@ -150,6 +153,15 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
         if (effect) sounds.play(effect);
         Confetti();
+    });
+
+    // Chart interactivity
+    window._barCharts = [...document.querySelectorAll('.bar-chart')].map(chart => {
+        return [...chart.querySelectorAll('rect')].map((bar, index) => {
+            return bar.addEventListener('click', e => {
+                document.dispatchEvent(new CustomEvent('swipe-slide', { detail: index }));
+            });
+        });
     });
 });
 
