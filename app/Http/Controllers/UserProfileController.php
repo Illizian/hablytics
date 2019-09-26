@@ -57,6 +57,7 @@ class UserProfileController extends Controller
                 $user->fill([
                     'password' => Hash::make($request->input('password'))
                 ])->save();
+                break;
             case 'reset':
                 $user->achievements()->delete();
                 break;
