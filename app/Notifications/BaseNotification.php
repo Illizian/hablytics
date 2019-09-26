@@ -94,7 +94,8 @@ class BaseNotification extends Notification
 
         // Add additional default options
         $message = $message->data(['id' => $notification->id])
-            ->badge(url('/icons/icon-hdpi.png'));
+            ->icon(url('/icons/icon-xxxhdpi.png'))
+            ->badge(url('/icons/icon-badge.png'));
 
         return $message;
     }
