@@ -39,3 +39,6 @@ Route::get('/user/reports/weekly', 'UserController@reportsWeekly')->name('user.r
 Route::get('/goals', 'GoalController@index')->name('goals.index');
 
 Route::get('/integrate', 'IntegrateController@index')->name('integrate.index');
+
+Route::get('/admin', 'AdminController@index')->name('admin.index');
+Route::post('/admin', 'AdminController@update')->name('admin.update');
