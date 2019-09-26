@@ -76,6 +76,16 @@
                                     @svg('icons/chevron-right')
                                 </a>
                             </li>
+                            @if(Auth::user()->admin)
+                                <li class="border-b border-gray-300">
+                                    <a class="flex py-4 px-2" href="{{ route('admin.index') }}">
+                                        <span class="flex-grow">
+                                            Administration
+                                        </span>
+                                        @svg('icons/chevron-right')
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                     </nav>
 
