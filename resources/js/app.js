@@ -146,6 +146,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     // Confetti
     window._confetti = [...document.querySelectorAll('[data-confetti]')].map(element => {
+        let effect = element.dataset.confettiAudio;
+
+        if (effect) sounds.play(effect);
         Confetti();
     });
 });

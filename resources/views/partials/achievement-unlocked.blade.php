@@ -1,6 +1,6 @@
 @if(Session::has('achievement'))
     <div id="achievement-modal" class="fixed inset-0 z-50 flex flex-col justify-center content-center bg-black-t-30 p-4">
-        <div class="relative shadow-md rounded-xl p-8 bg-white" data-confetti>
+        <div class="relative shadow-md rounded-xl p-8 bg-white" data-confetti data-confetti-audio="achievement-unlocked">
             <span class="absolute top-0 right-0 m-2 h-8 w-8" data-closer="#achievement-modal">
                 @svg('icons/cross')
             </span>
