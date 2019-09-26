@@ -89,6 +89,25 @@
                 @enderror
             </label>
 
+            <label class="mt-4 block">
+                <input
+                    class="form-checkbox mr-2 @if($errors->has('password_confirmation')) border border-red-500 @endif"
+                    name="privacy"
+                    type="checkbox"
+                    required
+                />
+
+                <span class="font-bold @if($errors->has('password_confirmation')) text-red-500 @else text-gray-700 @endif">
+                    You agree to our <a class="text-purple-700 underline" href="{{ route('privacy') }}">{{ __('Privacy Policy') }}</a> and <a class="text-purple-700 underline" href="{{ route('terms') }}">{{ __('Terms and Conditions') }}</a>
+                </span>
+
+                @error('password-confirm')
+                    <span class="mt-2 alert alert-sm" role="alert">
+                        {{ $message }}
+                    </span>
+                @enderror
+            </label>
+
             <div class="mt-4">
                 <button type="submit" class="btn">
                     {{ __('Register') }}
