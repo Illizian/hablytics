@@ -1,3 +1,11 @@
+// The swipe library will set an active data attribute when applicable
+// we can use this highlight graphs
+@for $i from 0 through 7 {
+    body[data-swipe-active="#{$i}"] #daily-bar-chart > svg > rect:nth-of-type(#{$i + 1}) {
+        @apply text-blue-200;
+    }
+}
+
 .legend > li {
     @apply flex items-center;
 
