@@ -25,6 +25,9 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('notify:prompt')
                  ->dailyAt('18:00');
+
+        $schedule->command('notify:report')
+                 ->weeklyOn(1, '8:00');
     }
 
     /**
