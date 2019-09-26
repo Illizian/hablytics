@@ -1,5 +1,5 @@
 <svg
-    class="{{ $class ?? '' }}"
+    class="bar-chart {{ $class ?? '' }}"
     width="{{ $chart->get('width') }}px"
     height="{{ $chart->get('height') }}px"
     viewBox="0 0 {{ $chart->get('width') }} {{ $chart->get('height') }}"

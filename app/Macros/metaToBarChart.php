@@ -39,7 +39,7 @@ class metaToBarChart
                 }
 
                 return collect(array_merge($column->toArray(), $props));
-            });
+            })->sortBy('x');
 
             return collect(compact(
                 'width',
