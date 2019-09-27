@@ -18,14 +18,16 @@ class metaToBarChart
             $max = $this->get('max');
             $min = $this->get('min');
             $columns = $this->get('count');
-            $colWidth = ($width - ($gap * $columns)) / $columns;
-            $segmentHeight = $height / max($max - $min, 1);
 
-            $data = $this->get('data')->map(function($column, $index) use ($height, $gap, $radius, $colWidth, $segmentHeight) {
+            $colWidth = ($width - ($gap * ($columns - 1))) / $columns;
+            $segmentHeight = $height / max($max - $min, 1);
+            $padding = ($width - (($colWidth * $columns) + ($gap * ($columns - 1)))) / 2;
+
+            $data = $this->get('data')->map(function($column, $index) use ($height, $gap, $radius, $colWidth, $segmentHeight, $padding) {
                 $count = $column->get('count');
                 $props = [
                     'width' => $colWidth,
-                    'x' => ($colWidth + $gap) * $index
+                    'x' => (($colWidth + $gap) * $index) + $padding
                 ];
 
                 if (empty($count)) {
