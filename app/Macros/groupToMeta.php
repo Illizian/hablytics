@@ -29,7 +29,7 @@ class groupToMeta
 
             $data = $values->map(function($column, $index) use ($total) {
                 return collect(array_merge($column, [
-                    'percentage' => round($column['count'] / $total, 2)
+                    'percentage' => $total ? round($column['count'] / $total, 2) : 0
                 ]));
             })->sort(function($a, $b) {
                 return ($a->get('count') < $b->get('count')) ? -1 : 1;

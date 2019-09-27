@@ -5,16 +5,16 @@ namespace App\Notifications;
 use App\Notifications\BaseNotification;
 use App\User;
 
-class UserRegistered extends Notification
+class UserRegistered extends BaseNotification
 {
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param User $user
      */
-    public function __construct(App $user)
+    public function __construct(User $user)
     {
-        $body = "${ $user->name } has registered.";
+        $body = $user->name . " has registered.";
 
         if (! $user->approved) {
             $body .= ' They require approval, please visit the admin area.';

@@ -11,7 +11,7 @@ use NotificationChannels\WebPush\HasPushSubscriptions;
 
 use App\Traits\UsesUuid;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, UsesUuid, Achiever, SoftDeletes, HasPushSubscriptions;
 
