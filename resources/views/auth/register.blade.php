@@ -108,6 +108,24 @@
                 @enderror
             </label>
 
+            <label class="mt-4 block">
+                <input
+                    class="form-checkbox mr-2 @if($errors->has('newsletter')) border border-red-500 @endif"
+                    name="newsletter"
+                    type="checkbox"
+                />
+
+                <span class="font-bold @if($errors->has('newsletter')) text-red-500 @else text-gray-700 @endif">
+                    You would like to receive our newsletter. It will keep you apprised of updates & news.
+                </span>
+
+                @error('newsletter')
+                    <span class="mt-2 alert alert-sm" role="alert">
+                        {{ $message }}
+                    </span>
+                @enderror
+            </label>
+
             <div class="mt-4">
                 <button type="submit" class="btn">
                     {{ __('Register') }}

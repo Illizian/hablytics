@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Newsletter;
 
 use App\Notifications\UserRegistered;
 
@@ -83,6 +84,11 @@ class RegisterController extends Controller
         // Notify Admin users
         $admins = User::where('admin', true)->get();
         Notification::sendNow($admins, new UserRegistered($user));
+
+        // Subscribe user to Newsletter if agreed
+        if(array_key_exists('newsletter', $data)) {
+            Newsletter::subscribe($data['email']);
+        }
 
         return $user;
     }
