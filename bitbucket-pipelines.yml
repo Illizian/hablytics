@@ -25,7 +25,7 @@ definitions:
         image: bitnami/laravel:6.0.2
         script:
           - vendor/bin/phpunit --coverage-text --colors=never
-          - php artisan code:analyse --env=testing
+          - php artisan code:analyse --no-progress --env=testing
     - step: &Deploy
         name: Deploy [Unnamed]
         script:
