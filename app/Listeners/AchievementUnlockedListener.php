@@ -11,7 +11,7 @@ class AchievementUnlockedListener
     /**
      * The Request, used to flash achievement messages
      *
-     * @var Illuminate\Http\Request
+     * @var \Illuminate\Http\Request
      */
     protected $request;
 
@@ -28,7 +28,7 @@ class AchievementUnlockedListener
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param  \Gstt\Achievements\Event\Unlocked  $event
      * @return void
      */
     public function handle(Unlocked $event)

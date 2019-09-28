@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
  *
  * @return Collection
  */
-class groupToMeta
+class groupToMeta extends Collection
 {
     public function __invoke()
     {

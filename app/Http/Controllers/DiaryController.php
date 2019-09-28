@@ -27,7 +27,7 @@ class DiaryController extends Controller
     /**
      * Either show the Diary List or redirect to a single diary view.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Contracts\Support\Renderable|\Illuminate\Http\RedirectResponse
      */
     public function index()
     {

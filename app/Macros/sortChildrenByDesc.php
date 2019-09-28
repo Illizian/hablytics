@@ -11,7 +11,7 @@ use Illuminate\Support\Collection;
  *
  * @return \Illuminate\Support\Collection
  */
-class sortChildrenByDesc
+class sortChildrenByDesc extends Collection
 {
     public function __invoke()
     {

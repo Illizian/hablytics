@@ -15,7 +15,7 @@ class CheckAdminRole
      */
     public function handle($request, Closure $next)
     {
-        if (! auth()->user()->admin) {
+        if (! $request->user()->admin) {
             return redirect()->route('profile.index');
         }
 

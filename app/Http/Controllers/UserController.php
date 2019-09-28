@@ -27,7 +27,7 @@ class UserController extends Controller
      *
      * @param \App\Http\Requests\UpdateUserSubscriptionRequest $request
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Http\JsonResponse
      */
     public function updateSubscription(UpdateUserSubscriptionRequest $request)
     {
@@ -38,7 +38,7 @@ class UserController extends Controller
 
         $request->user()->updatePushSubscription($endpoint, $key, $token, $contentEncoding);
 
-        return response()->json(null, 204);
+        return response()->json([ 'status' => 'ok' ], 204);
     }
 
     /**
@@ -46,7 +46,7 @@ class UserController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Http\JsonResponse
      */
     public function testSubscription(Request $request)
     {
@@ -55,16 +55,16 @@ class UserController extends Controller
         // another user
         if ($request->filled('user')) {
             // Check current user has admin priviledges
-            if (!$user->admin) return response()->json(null, 401);
+            if (!$user->admin) return response()->json([ 'err' => 'You do not have permission' ], 401);
             $user = User::find($request->input('user'));
         }
         // Check we still have a valid user
-        if (!$user) return response()->json(null, 404);
+        if (!$user) return response()->json([ 'err' => 'User not found!' ], 404);
 
         // Send the selected user a DailyPrompt notification
         $user->notify(new DailyPrompt);
 
-        return "Push Dispatched!";
+        return response()->json([ 'status' => 'ok' ]);;
     }
 
     /**
@@ -78,7 +78,7 @@ class UserController extends Controller
     {
         // Get the date range for this Report
         $to = Carbon::parse('last Sunday');
-        $from = $to->copy()->subWeek(1);
+        $from = $to->copy()->subWeek();
 
         // Get events from DiaryTag Model
         $diary_ids = $request->user()->diaries()->get()->pluck('id');

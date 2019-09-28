@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
  *
  * @return Array
  */
-class metaToPieChart
+class metaToPieChart extends Collection
 {
     public function __invoke()
     {
