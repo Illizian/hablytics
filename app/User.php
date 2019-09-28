@@ -61,6 +61,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * Determine this User's "favourite" Tags
+     * @param int $limit
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection
      */
     public function favouriteTags($limit = 10)
     {
@@ -76,7 +78,7 @@ class User extends Authenticatable implements MustVerifyEmail
                         })->first();
 
                         $value = $group->sum(function($tag) {
-                            return (int) $tag->pivot->value || 1;
+                            return (int) $tag->pivot->value ?? 1;
                         });
 
                         return [

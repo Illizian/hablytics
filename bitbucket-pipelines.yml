@@ -25,6 +25,7 @@ definitions:
         image: bitnami/laravel:6.0.2
         script:
           - phpunit --coverage-text --colors=never
+          - php artisan code:analyse
     - step: &Deploy
         name: Deploy [Unnamed]
         script:
@@ -35,6 +36,10 @@ definitions:
     public: public
 
 pipelines:
+  default:
+    - step: *Install
+    - step: *Build
+    - step: *Test
   branches:
     release/staging:
       - step: *Install

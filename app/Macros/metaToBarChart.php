@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
  *
  * @return Array
  */
-class metaToBarChart
+class metaToBarChart extends Collection
 {
     public function __invoke()
     {

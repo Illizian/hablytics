@@ -41,7 +41,6 @@ class TagController extends Controller
                         ->whereIn('diary_id', $user->diaries()->get()->pluck('id'))
                         ->whereDate('at', '>=', Carbon::now()->subDays(30)->format('Y-m-d'))
                         ->get()
-                        ->load('tag')
                         ->sortByDesc('at')
                         ->flatten();
 

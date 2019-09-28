@@ -16,7 +16,7 @@ use Illuminate\Support\Collection;
  *
  * @return \Illuminate\Support\Collection
  */
-class GroupByDateRange
+class GroupByDateRange extends Collection
 {
     public function __invoke()
     {

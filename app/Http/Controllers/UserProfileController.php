@@ -45,7 +45,7 @@ class UserProfileController extends Controller
      *
      * @param \App\Http\Requests\UpdateUserRequest $request
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateUserRequest $request)
     {

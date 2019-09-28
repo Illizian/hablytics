@@ -16,14 +16,14 @@ class UserRegistered extends Mailable
     /**
      * The App\User that has registered
      *
-     * @var App\User
+     * @var \App\User
      */
     public $user;
 
     /**
      * Create a new message instance.
      *
-     * @param App\User $user
+     * @param \App\User $user
      *
      * @return void
      */

@@ -10,9 +10,26 @@ use NotificationChannels\WebPush\WebPushChannel;
 class BaseNotification extends Notification
 {
     /**
+     * @var string
+     */
+    private $title;
+
+    /**
+     * @var string
+     */
+    private $body;
+
+    /**
+     * @var array
+     */
+    private $actions;
+
+    /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param string|null $title
+     * @param string|null $body
+     * @param array $actions
      */
     public function __construct(string $title = null, string $body = null, array $actions = [])
     {
@@ -38,7 +55,7 @@ class BaseNotification extends Notification
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
     public function toMail($notifiable)
     {
@@ -69,7 +86,7 @@ class BaseNotification extends Notification
      *
      * @param  mixed  $notifiable
      * @param  mixed  $notification
-     * @return \Illuminate\Notifications\Messages\DatabaseMessage
+     * @return WebPushMessage
      */
     public function toWebPush($notifiable, $notification)
     {
