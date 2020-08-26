@@ -53,10 +53,7 @@ class DiaryController extends Controller
     public function postCreate(Request $request)
     {
         $user = Auth::user();
-        $diary = new Diary;
-        $diary->fill($request->only(['name']));
-        $diary->save();
-
+        $diary = Diary::create($request->only(['name']));
         $user->diaries()->attach($diary);
 
         return redirect()->route('home');
