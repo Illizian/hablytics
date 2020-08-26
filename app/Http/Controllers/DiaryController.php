@@ -62,11 +62,7 @@ class DiaryController extends Controller
     public function view($id)
     {
         $user = Auth::user();
-        $diary = $user->diaries()->find($id);
-
-        if (empty($diary)) {
-            return abort(404, "Diary not found with the ID {$id}!");
-        }
+        $diary = $user->diaries()->findOrFail($id);
 
         // Actually get events from DiaryTag Model
         $events = DiaryTag::where([
