@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
+use App\Diary;
+use App\DiaryTag;
+use Illuminate\Support\Str;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
-
-use App\Diary;
-use App\DiaryTag;
 use App\Http\Requests\CreateEventRequest;
-use App\Tag;
 
 class DiaryController extends Controller
 {
@@ -37,13 +37,12 @@ class DiaryController extends Controller
             // User only has one diary, redirect to directly to that diary.
             $diary = $user->diaries()->first();
 
-            return redirect("/diary/$diary->id");
-        } else {
-            // Collect all Users' diaries and display as a list
-            $diaries = $user->diaries()->get();
-
-            return view('diaries.index', [ 'diaries' => $diaries ]);
+            return redirect("/diary/{$diary->id}");
         }
+        // Collect all Users' diaries and display as a list
+        $diaries = $user->diaries()->get();
+
+        return view('diaries.index', ['diaries' => $diaries]);
     }
 
     public function create()
@@ -54,26 +53,21 @@ class DiaryController extends Controller
     public function postCreate(Request $request)
     {
         $user = Auth::user();
-        $diary = new Diary;
-        $diary->fill($request->only(['name']));
-        $diary->save();
-
+        $diary = Diary::create($request->only(['name']));
         $user->diaries()->attach($diary);
 
-        return redirect('/');
+        return redirect()->route('home');
     }
 
     public function view($id)
     {
         $user = Auth::user();
-        $diary = $user->diaries()->find($id);
-
-        if (empty($diary)) return abort(404, "Diary not found with the ID $id!");
+        $diary = $user->diaries()->findOrFail($id);
 
         // Actually get events from DiaryTag Model
         $events = DiaryTag::where([
-            [ 'diary_id', '=', $id ],
-            [ 'at', '>=', Carbon::now()->subWeek() ]
+            ['diary_id', '=', $id],
+            ['at', '>=', Carbon::now()->subWeek()],
         ])
             ->get()
             ->load('tag')
@@ -87,7 +81,7 @@ class DiaryController extends Controller
             'chart' => $chart,
             'dates' => $events,
             'userFavourites' => $user->favouriteTags(),
-            'diaryFavourites' => $diary->favouriteTags()
+            'diaryFavourites' => $diary->favouriteTags(),
         ]);
     }
 
@@ -97,25 +91,29 @@ class DiaryController extends Controller
         $diary = $user->diaries()->find($id);
         $tags = Tag::get();
 
-        if (empty($diary)) return abort(404, "Diary not found with the ID $id!");
+        if (empty($diary)) {
+            return abort(404, "Diary not found with the ID {$id}!");
+        }
 
-        return view('events.create', [ 'tags' => $tags ]);
+        return view('events.create', ['tags' => $tags]);
     }
 
     public function postCreateEvent($id, CreateEventRequest $request)
     {
         $user = Auth::user();
         $diary = $user->diaries()->find($id);
-        if (empty($diary)) return abort(404, "Diary not found with the ID $id!");
+        if (empty($diary)) {
+            return abort(404, "Diary not found with the ID {$id}!");
+        }
 
         $tag = Tag::firstOrCreate([
-            'name' => Str::title($request->input('tag'))
+            'name' => Str::title($request->input('tag')),
         ]);
 
         // Extract pivot values
         $pivot = [];
         if ($request->filled('at')) {
-            $pivot['at'] = Carbon::createFromFormat('Y-m-d\TH:i', $request->input('at'));
+            $pivot['at'] = Carbon::createFromFormat('Y-m-d\\TH:i', $request->input('at'));
         }
 
         if ($request->filled('value')) {
@@ -124,6 +122,6 @@ class DiaryController extends Controller
 
         $diary->events()->attach($tag, $pivot);
 
-        return redirect("/diary/$id");
+        return redirect("/diary/{$id}");
     }
 }
